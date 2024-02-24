@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'rest_mini_socialnetwok.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'test',
+        'PASSWORD': 'test',
+        'HOST': 'db',
+        'PORT': '5432',
+        'NAME': 'shopin_db',
     }
 }
 

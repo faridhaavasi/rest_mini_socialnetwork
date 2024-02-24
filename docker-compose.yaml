@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 3000:3000"
+    volumes:
+      - .:/app
+    
+    ports:
+      - "3000:3000"
+  
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine
+
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+
+
+volumes:
+  postgres_data:
