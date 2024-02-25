@@ -7,3 +7,5 @@ class SetDataRegisterSerializer(serializers.ModelSerializer):
         fields = ('email', 'phone_number', 'fullname')
 
 
+class SetcodeRegister(serializers.Serializer):
+    code = serializers.CharField(max_length=5)
