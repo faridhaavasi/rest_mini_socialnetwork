@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from random import randint
 from .serializers import SetDataRegisterSerializer, SetcodeRegisterSerializer
 from . models import User
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 class SetDataRegister(APIView):
     serializer_class = SetDataRegisterSerializer
     def post(self, request):
@@ -17,6 +19,7 @@ class SetDataRegister(APIView):
                 'password' : vd['password'],
                 'code': code
             }
+            # TODO sms verifycation code
             print(code)
             return Response(serializer.data)
         return Response(serializer.errors)
@@ -34,6 +37,7 @@ class SetcodeRegister(APIView):
                     phone_number=user_info_data['phone_number'],
                     email =user_info_data['email'],
                     password=user_info_data['password'])
+
                 del (request.session['user_info_data'])
                 return Response(request.data)
             return Response(serializer.errors)
